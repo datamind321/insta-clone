@@ -8,7 +8,8 @@ from .forms import NewPostForm
 from comment.models import Comment
 from comment.forms import NewCommentForm
 from django.contrib.auth.decorators import login_required
-
+from directs.models import Message
+import json
 
 # Create your views here.
 
@@ -16,20 +17,39 @@ from django.contrib.auth.decorators import login_required
 def index(request):
     user = request.user
     all_users = User.objects.all()
-    print(all_users)
+    # print(all_users)
     follow_status = Follow.objects.filter(following=user,follower=request.user).exists()
     profile = Profile.objects.all()
-    print(profile)
-
+    # print(profile)
+   
+    
     posts = Stream.objects.filter(user=user)
-    print(posts) 
+    # print(posts) 
 
     group_ids = []
+    stories=[]
+    for users in Profile.objects.all():
+        items = []
+        for status in Stories.objects.all():
+            items.append({
+                "id":status.id,
+                "type":"",
+                "length":3,
+                "src":f'/media/{status.story}',
+            })
+        stories.append({ 
+            "id":str(status.uid),
+            "photo":f'/media/{users.username.profile.image}',
+            "items":items,
+            "name":users.username.username,
+
+        })
+
 
     for post in posts:
         group_ids.append(post.post_id)
 
-    print(group_ids)
+    # print(group_ids)
 
     post_items = Post.objects.filter(id__in=group_ids).all().order_by('-posted')
 
@@ -46,6 +66,8 @@ def index(request):
             'follow_status':follow_status,
             'all_users':all_users,
             'profile':profile,
+            'stories':json.dumps(stories)
+          
             # 'users_paginator':user_paginator,
         }
     
@@ -160,6 +182,10 @@ def favourite(request,post_id):
     else:
         profile.favourite.add(post)
     return HttpResponseRedirect(reverse('post-details',args=[post.id]))
+
+
+
+    
 
 
 

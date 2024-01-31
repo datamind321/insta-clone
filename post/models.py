@@ -117,4 +117,15 @@ post_delete.connect(Likes.user_unliked_post,sender=Likes)
 
 post_save.connect(Follow.user_follow,sender=Follow)
 post_delete.connect(Follow.user_unfollow,sender=Follow)
+
+
+class StoryProfile(models.Model):
+    uids = models.UUIDField(default=uuid.uuid1,editable=False,primary_key=True)
+    username = models.ForeignKey(User,on_delete=models.CASCADE)
+
+class Stories(models.Model):
+    user = models.ForeignKey(User,on_delete=models.CASCADE,related_name='status')
+    story = models.FileField(upload_to='status')
+
+
     

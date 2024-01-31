@@ -8,4 +8,5 @@ urlpatterns = [
     path('tag/<slug:tag_slug>', tags, name='tags'),
     path('<uuid:post_id>/like', like, name='like'),
     path('<uuid:post_id>/favourite', favourite, name='favourite'),
+
 ]

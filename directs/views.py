@@ -13,6 +13,7 @@ from django.core.paginator import Paginator
 def inbox(request):
     user=request.user
     messages = Message.get_message(user=request.user)
+
     
     active_direct = None
     directs = None
@@ -23,12 +24,16 @@ def inbox(request):
         print(message)
         active_direct = message['users'].username
         print(active_direct)
+        
+    
        
         directs=Message.objects.filter(user=request.user,reciepient=message['users'])
-        print(directs)
-        directs.update(is_read=True)
+        print(directs)      # showing all messages respected users
+        directs.update(is_read=True)    
 
         for message in messages:
+             
+             
              if message['users'].username == active_direct:
                  message['unread'] = 0
     
@@ -37,6 +42,8 @@ def inbox(request):
         'messages':messages,
         'active_direct':active_direct,
         'profile':profile,
+        
+        
     }
     return render(request,'directs/direct.html',context)
 
