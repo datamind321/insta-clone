@@ -10,4 +10,9 @@ admin.site.register(Tag)
 admin.site.register(Post)
 admin.site.register(Follow)
 admin.site.register(Stream)
-admin.site.register(Stories)
+
+admin.site.register(Story)
+
+admin.site.register(StoryProfile)
+
+

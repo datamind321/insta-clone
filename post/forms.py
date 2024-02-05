@@ -1,5 +1,5 @@
 from django import forms 
-from post.models import Post
+from post.models import Post,Story
 
 class NewPostForm(forms.ModelForm):
     picture = forms.ImageField(required=True)
@@ -10,3 +10,12 @@ class NewPostForm(forms.ModelForm):
     class Meta:
         model=Post
         fields = ['picture','caption','tags']
+
+
+          
+       
+       
+    
+
+       
+           

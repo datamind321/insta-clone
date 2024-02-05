@@ -5,112 +5,53 @@
 
     <main class="main-container">
         <section class="content-container">
+
+
+            
+            
             <div class="content">
+                <button type="button" class="btn btn-info"><a href="{% url 'addstory' %}">Add To Story</a></button>
 
 
 
 
 
 
-
-<!-- 
-                <div id="stories">
- 
-               
-                    <div class="story" data-id="{{storyId}}" data-last-updated="{{story.lastUpdated}}" data-photo="{{story.photo}}">
-                        <a class="item-link" href="{{story.link}}">
+                <div id="stories" style="overflow-x: scroll;">
+                
+                
+                    <!-- <div class="story" data-id="" data-last-updated="" data-photo="item-photo">
+                        <a class="item-link" href="">
                           <span class="item-preview">
-                            <img src="{{story.photo}}" />
+                            <img decoding="async" src="" />
                           </span>
                           <span class="info" itemProp="author" itemScope="" itemType="http://schema.org/Person">
-                            <strong class="name" itemProp="name">{{story.name}}</strong>
-                            <span class="time">{{story.lastUpdated}}</span>
+                            <strong class="name" itemProp="name">story_name</strong>
+                            <span class="time">lastupdated</span>
                           </span>
                         </a>
                         
                         <ul class="items">
                         
-                            
-                            <li data-id="{{storyItemId}}" data-time="{{storyItem.time}}" class="{{storyItem.seen}}">
-                                <a href="{{storyItem.src}}"
-                                
-                                 data-type="{{storyItem.type}}" 
-                                 data-length="{{storyItem.length}}" 
-                                 data-link="{{storyItem.link}}" 
-                                 data-linkText="{{storyItem.linkText}}" 
-                                 
-                                 data-custom-key="" 
-                                 data-another-custom-key="">
-                                    <img src="{{storyItem.preview}}" />
+                             story item -->
+                            <!-- <li data-id="{{storyItemId}}" data-time="{{storyItem.time}}" class="{{storyItem.seen}}">
+                                <a href="{{storyItem.src}}" data-type="{{storyItem.type}}" data-length="{{storyItem.length}}" data-link="{{storyItem.link}}" data-linkText="{{storyItem.linkText}}">
+                                    <img decoding="async" src="{{storyItem.preview}}" />
                                 </a>
-                            </li>
-                          
+                            </li> -->
+                            <!--/ story item -->
                             
-                        </ul>
-                    </div>
-                   
-                    
-                </div> -->
+                        <!-- </ul>
+                    </div> -->
+                    <!--/ story -->
                 
-           
-
-
-
-
-
-                <div id="stories">
-                    <button class="stories__left-button">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                            <path fill="var(--primary)" d="M256 504C119 504 8 393 8 256S119 8 256 8s248 111 248 248-111 248-248 248zM142.1 273l135.5 135.5c9.4 9.4 24.6 9.4 33.9 0l17-17c9.4-9.4 9.4-24.6 0-33.9L226.9 256l101.6-101.6c9.4-9.4 9.4-24.6 0-33.9l-17-17c-9.4-9.4-24.6-9.4-33.9 0L142.1 239c-9.4 9.4-9.4 24.6 0 34z"></path>
-                        </svg>
-                    </button>
-                    <div class="stories__content">
-
-                      
-                        <button class="story">
-                            <div class="story__avatar">
-                                <div class="story__border">
-                                    <svg width="64" height="64" xmlns="http://www.w3.org/2000/svg">
-                                        <circle r="31" cy="32" cx="32"/>
-                                    </svg>
-                                </div>
-                                <div class="story__picture">
-                                    <a href="">
-                                    <img src="{{request.user.profile.image.url}}" style="width: 80px; height: 80px; object-fit: cover;">
-                                    </a>
-                                </div>
-                            </div>
-                            <span class="story__user">{{request.user.username}}</span>
-                        </button>
-
-                        {% for prof in profile %}
-                        <button class="story">
-                            <div class="story__avatar">
-                                <div class="story__border">
-                                    <svg width="64" height="64" xmlns="http://www.w3.org/2000/svg">
-                                        <circle r="31" cy="32" cx="32"/>
-                                    </svg>
-                                </div>
-                                <div class="story__picture">
-                                    <img src="{{prof.image.url}}" style="width: 80px; height: 80px; object-fit: cover;">
-                                </div>
-                            </div>
-                            <span class="story__user">{{pf.user.username}}</span>
-                        </button>
-                        {% endfor %}
-                     
-                      
-
-
-
-                      
-                    </div>
-                    <button class="stories__right-button">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                            <path fill="var(--primary)" d="M256 8c137 0 248 111 248 248S393 504 256 504 8 393 8 256 119 8 256 8zm113.9 231L234.4 103.5c-9.4-9.4-24.6-9.4-33.9 0l-17 17c-9.4 9.4-9.4 24.6 0 33.9L285.1 256 183.5 357.6c-9.4 9.4-9.4 24.6 0 33.9l17 17c9.4 9.4 24.6 9.4 33.9 0L369.9 273c9.4-9.4 9.4-24.6 0-34z"></path>
-                        </svg>
-                    </button>
+                
+                
+                
+                
                 </div>
+
+
 
                 <div class="posts">
                     {% for post in post_items %}
@@ -325,7 +266,7 @@
   list: false,           // displays a timeline instead of carousel
   openEffect: true,      // enables effect when opening story
   cubeEffect: false,     // enables the 3d cube effect when sliding story
-  autoFullScreen: false, // enables fullscreen on mobile browsers
+  autoFullScreen: true, // enables fullscreen on mobile browsers
   backButton: true,      // adds a back button to close the story viewer
   backNative: false,     // uses window history to enable back button on browsers/android
   previousTap: true,     // use 1/3 of the screen to navigate to previous item when tap the story
@@ -390,18 +331,9 @@
     unmute: 'Touch to unmute',
     keyboardTip: 'Press space to see next',
     visitLink: 'Visit link',
-    time: {
-      ago:'ago', 
-      hour:'hour', 
-      hours:'hours', 
-      minute:'minute', 
-      minutes:'minutes', 
-      fromnow: 'from now', 
-      seconds:'seconds', 
-      yesterday: 'yesterday', 
-      tomorrow: 'tomorrow', 
-      days:'days'
-    }
+    time: "12"
+     
+    
   }
 });
 </script>

@@ -10,6 +10,7 @@ from comment.forms import NewCommentForm
 from django.contrib.auth.decorators import login_required
 from directs.models import Message
 import json
+from django.http import HttpResponse
 
 # Create your views here.
 
@@ -28,20 +29,22 @@ def index(request):
 
     group_ids = []
     stories=[]
-    for users in Profile.objects.all():
-        items = []
-        for status in Stories.objects.all():
+    for users in StoryProfile.objects.all():
+        items = []    
+        for status in users.status.all():
             items.append({
                 "id":status.id,
                 "type":"",
                 "length":3,
-                "src":f'/media/{status.story}',
+                "src": f'/media/{status.file}',
+                
+
             })
         stories.append({ 
-            "id":str(status.uid),
-            "photo":f'/media/{users.username.profile.image}',
+            "id":str(users.uid),
+            "photo":f'/media/{users.user.profile.image}',
             "items":items,
-            "name":users.username.username,
+            "name": users.user.username,
 
         })
 
@@ -66,7 +69,8 @@ def index(request):
             'follow_status':follow_status,
             'all_users':all_users,
             'profile':profile,
-            'stories':json.dumps(stories)
+            'stories':json.dumps(stories),
+            
           
             # 'users_paginator':user_paginator,
         }
@@ -188,7 +192,19 @@ def favourite(request,post_id):
     
 
 
-
+def add_story(request):
+    user = StoryProfile.objects.get(user_id=request.user)
+    print(user)
+    if request.method=='POST':
+        
+        story = request.FILES.get('story')
+        user_story = Story.objects.create(user=user,file=story)
+        return redirect('index')
+        
+     
+    
+   
+    return render(request,'app/add_story.html',{'user':user})
 
 
 

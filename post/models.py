@@ -120,12 +120,23 @@ post_delete.connect(Follow.user_unfollow,sender=Follow)
 
 
 class StoryProfile(models.Model):
-    uids = models.UUIDField(default=uuid.uuid1,editable=False,primary_key=True)
-    username = models.ForeignKey(User,on_delete=models.CASCADE)
+    uid = models.UUIDField(default=uuid.uuid1,editable=False,primary_key=True)
+    user = models.ForeignKey(User,on_delete=models.CASCADE)   
 
-class Stories(models.Model):
-    user = models.ForeignKey(User,on_delete=models.CASCADE,related_name='status')
-    story = models.FileField(upload_to='status')
+
+    def __str__(self) -> str:
+        return str(self.user)
+
+  
+
+  
+
+class Story(models.Model):
+    user = models.ForeignKey(StoryProfile,on_delete=models.CASCADE,related_name='status')
+    file = models.FileField(upload_to='status')
+ 
+
+
 
 
     
