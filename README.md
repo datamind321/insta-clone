@@ -11,4 +11,4 @@
 - Authentication System etc.
 
 ## Project Link 
-https://web-production-b713.up.railway.app/
+https://social-media-app-dj.up.railway.app/
